@@ -1,1 +1,3 @@
-export const schemaTypes = []
+import { momentsType } from "./Card";
+
+export const schemaTypes = [momentsType]
