@@ -11,6 +11,9 @@ gsap.registerPlugin(ScrollTrigger);
 const Content = () => {
   const [moments, setMoments] = useState<MomentType[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const subheadingRef = useRef<HTMLParagraphElement>(null);
+
 
   useEffect(() => {
     Client.fetch(momentsQuery).then(setMoments);
@@ -20,6 +23,41 @@ const Content = () => {
     if (!scrollRef.current) return;
 
     const cards = scrollRef.current.querySelectorAll(".scroll-card");
+
+    if (headingRef.current) {
+  gsap.fromTo(
+    headingRef.current,
+    { opacity: 0, y: 30 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: headingRef.current,
+        start: "top 80%",
+      },
+    }
+  );
+}
+
+if (subheadingRef.current) {
+  gsap.fromTo(
+    subheadingRef.current,
+    { opacity: 0, y: 30 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      delay: 0.2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: subheadingRef.current,
+        start: "top 80%",
+      },
+    }
+  );
+}
 
     cards.forEach((card) => {
       gsap.fromTo(
@@ -40,6 +78,26 @@ const Content = () => {
         }
       );
     });
+
+    const images = scrollRef.current.querySelectorAll(".scroll-image");
+
+            images.forEach((image) => {
+              gsap.fromTo(
+                image,
+                { scale: 0.9, opacity: 0 },
+                {
+                  scale: 1,
+                  opacity: 1,
+                  duration: 1,
+                  ease: "power2.out",
+                  scrollTrigger: {
+                    trigger: image,
+                    start: "top 80%",
+                  },
+                }
+              );
+            });
+
             const handleWheel = (e: WheelEvent) => {
           if (!scrollRef.current) return;
           // Only trigger on vertical scroll (deltaY)
@@ -58,12 +116,7 @@ const Content = () => {
           scrollContainer.removeEventListener("wheel", handleWheel);
           ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
         };
-
-
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, [moments]);
+             }, [moments]);
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
@@ -76,12 +129,19 @@ const Content = () => {
 
   return (
     <section className="p-6 sm:p-10 bg-white dark:bg-[#121212]">
-      <h2 className="text-4xl font-bold text-center mb-4 text-gray-900 dark:text-white">
-        ✨ Featured Moments
-      </h2>
-      <p className="text-center text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-        Our experiences reflect our distinct ethos and core values, highlighting the very best each of our homes offers.
-      </p>
+                <h2
+            ref={headingRef}
+            className="font-cabinet  text-4xl font-bold  mb-4 text-gray-900 dark:text-white"
+          >
+            Featured Moments
+          </h2>
+          <p
+            ref={subheadingRef}
+            className="font-raleway text-gray-600 dark:text-gray-400 mb-8 max-w-2xl "
+          >
+            Our experiences reflect our distinct ethos and core values, highlighting the very best each of our homes offers.
+          </p>
+
 
       <div className="relative">
         {/* Arrow Buttons */}
@@ -121,15 +181,15 @@ const Content = () => {
               .auto("format")
               .url()}
             alt={moment.title}
-            className="w-full h-full object-cover"
+            className="scroll-image w-full h-full object-cover"
             loading="lazy"
           />
         </div>
         <div className="p-4">
-          <h3 className="text-lg font-bold mb-1 text-gray-900 dark:text-white">
+          <h3 className="font-cabinet text-lg font-bold mb-1 text-gray-900 dark:text-white">
             {moment.title}
           </h3>
-          <p className="text-sm text-gray-600 dark:text-gray-300">
+          <p className="font-raleway text-sm text-gray-600 dark:text-gray-300">
             {moment.description}
           </p>
         </div>
