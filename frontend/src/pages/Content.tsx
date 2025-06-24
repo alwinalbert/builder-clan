@@ -128,10 +128,10 @@ if (subheadingRef.current) {
   };
 
   return (
-    <section className="p-6 sm:p-10 bg-white dark:bg-[#121212]">
+    <section className="flex flex-col gap-2 p-6 sm:p-10 bg-white dark:bg-[#121212] mt-10">
                 <h2
             ref={headingRef}
-            className="font-cabinet  text-4xl font-bold  mb-4 text-gray-900 dark:text-white"
+            className="font-cabinet  text-4xl   mb-4 text-gray-900 dark:text-white"
           >
             Featured Moments
           </h2>
@@ -145,7 +145,7 @@ if (subheadingRef.current) {
 
       <div className="relative">
         {/* Arrow Buttons */}
-        <div className="absolute right-4 -top-14 z-10 flex gap-2">
+        <div className="absolute right-4 -top-24 z-10 flex gap-2">
           <button
             onClick={() => scroll("left")}
             className="bg-white border-black border dark:bg-[#1e1e1e] p-2 rounded-full size-10 shadow hover:scale-110 transition"
@@ -186,7 +186,7 @@ if (subheadingRef.current) {
           />
         </div>
         <div className="p-4">
-          <h3 className="font-cabinet text-lg font-bold mb-1 text-gray-900 dark:text-white">
+          <h3 className="font-cabinet text-lg  mb-1 text-gray-900 dark:text-white">
             {moment.title}
           </h3>
           <p className="font-raleway text-sm text-gray-600 dark:text-gray-300">
