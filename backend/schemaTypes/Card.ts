@@ -9,14 +9,14 @@ export const momentsType = defineType({
             name:'title',
             title:'Tile',
             type:'string',
-            validation:Rule=>Rule.required(),
+            validation:(Rule: { required: () => any; })=>Rule.required(),
         }),
 
         defineField({
             name:'description',
             title:'Description',
             type:'text',
-            validation:Rule=>Rule.required(),
+            validation:(Rule: { required: () => any; })=>Rule.required(),
         }),
         
         defineField({
@@ -26,7 +26,7 @@ export const momentsType = defineType({
             options:{
                 hotspot:true,
             },
-            validation:Rule=>Rule.required(),
+            validation:(Rule: { required: () => any; })=>Rule.required(),
 
         }),
         defineField({
@@ -37,7 +37,7 @@ export const momentsType = defineType({
                 source:'title',
                 maxLength:96,
             },
-            validation:Rule=>Rule.required(),
+            validation:(Rule: { required: () => any; })=>Rule.required(),
         }),
     ],
 });
