@@ -8,7 +8,7 @@ export default defineConfig({
   title: 'backend',
 
   projectId: 'c4hzuxqf',
-  dataset: 'production',
+  dataset: 'moments',
 
   plugins: [structureTool(), visionTool()],
 
